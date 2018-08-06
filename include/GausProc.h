@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <TMatrixDSym.h>
+#include "TMatrixD.h"
 
 #ifndef __CINT__
 #include <cassert>
@@ -36,7 +37,7 @@ class GausProc {
   TMatrixDSym* GetCovarianceMatrix();
 
   int process();
-  void Write(int first, const char *add = "") const;
+  void Write(int first, const char *add = "",float xmin=0, float xmax=0);
   double prob() const;
   double probDer(int n) const;
   double probDer(int n, int m) const;
@@ -44,6 +45,9 @@ class GausProc {
   void unwarp(int wp = 0);
   void Integral(const double _xmin, const double _xmax, 
 		double &Integral, double &dIntegral);
+  void GetOneFunction(int seed,std::vector<double> &Xf, std::vector<double> &Yf, int &props);
+  void DecomposeChol();
+  int FunctionProp(std::vector<double> xf, std::vector<double> yf);
 
 #ifndef __CINT__
 #define CHECKED_ACCESS 0
@@ -89,13 +93,14 @@ class GausProc {
 
   vector1 _y;
   vector1 _dy;
-  vector2 y;
   vector1 yy;
   vector1 dy;
   vector1 x;
 
+  vector2 y;
   vector2 yOut;
   vector2 dyOut;
+  vector2 cholDecomp;
   vector1 xOut;
 #endif
 

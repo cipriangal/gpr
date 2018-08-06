@@ -1,10 +1,10 @@
 void gp()
 {
-  gSystem->Load("../build/libgpr.dylib");
+  gSystem->Load("../install/lib/libGausProc.so");
 
   int verbosity=0;
 
-  string outfile="o_gp_ex32.root";
+  char *outfile="o_gp.root";
   const unsigned nData=30;
 
   double _x[30]={0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,6.1,6.3,6.5,6.7,6.9,7.1,7.3,7.5,7.7,7.9,8.1,8.3,8.5,8.7,8.9,9.1,9.3,9.5,9.7,9.9};
@@ -23,7 +23,7 @@ void gp()
   double xmax=11;
   unsigned nPredictions=1000;
   
-  GausProc a(x, y, sigma_y, xmin, xmax, nPredictions, outfile.c_str());
+  GausProc a(x, y, sigma_y, xmin, xmax, nPredictions, outfile);
   gSystem->Exec(Form("rm -f %s",outfile));
   
   for(int i=0;i<x.size();i++)
