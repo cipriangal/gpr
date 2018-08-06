@@ -40,7 +40,16 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 find_package(GSL REQUIRED)
 include_directories(${GSL_INCLUDE_DIR})
 
-add_library(gpr-lib SHARED ${sources} ${headers})
+
+ROOT_GENERATE_DICTIONARY(
+    gprDict                         # path to dictionary to generate
+    "include/GausProc.h"           # list of classes to process
+    "include/GPOptimizer.h"
+    LINKDEF "include/GausProcLinkDef.h"  # ROOT linkDef file
+    OPTIONS -p
+)
+
+add_library(gpr-lib SHARED ${sources} ${headers} gprDict.cxx)
 set_target_properties(gpr-lib PROPERTIES OUTPUT_NAME gpr)
 target_link_libraries(gpr-lib ${ROOT_LIBRARIES} ${GSL_LIBRARIES} ${EIGEN3_LIBRARIES})
 
