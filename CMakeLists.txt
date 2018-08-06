@@ -26,7 +26,7 @@ file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB headers ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-add_definitions(-std=c++14)
+add_definitions(-std=c++11)
 
 # Load ROOT and setup include directory
 find_package(ROOT REQUIRED)
